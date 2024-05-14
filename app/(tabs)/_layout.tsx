@@ -1,37 +1,82 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { View, Text, Image } from 'react-native';
+import { Tabs, Redirect } from 'expo-router';
+import Icon from '../../constants/icon'
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+const TabIcon = ({ icon, color, name, focused }: { icon: any, color: string, name: string, focused: boolean }) => {
+
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
+    <View>
+      <Image
+        source={icon}
+        resizeMode='contain'
+        tintColor={'#014740'}
+        style={{ tintColor: focused ? '#014740' : 'gray' }}
+      // className='w-6 h-6'
       />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
-  );
+    </View>
+  )
 }
+
+
+
+const TabsLayout = () => {
+  return (
+    <>
+      <Tabs
+        screenOptions={
+          {
+
+            tabBarActiveTintColor: '#014740',
+            tabBarInactiveTintColor: 'gray',
+
+          }
+        }
+      >
+        <Tabs.Screen name="inicio"
+          options={{
+            title: 'Inicio',
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon icon={Icon.inicio} color={color} name='Inicio' focused={focused} />
+            )
+          }} />
+        <Tabs.Screen name="buscar"
+          options={{
+            title: 'Buscar',
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon icon={Icon.lupa} color={color} name='Buscar' focused={focused} />
+            )
+          }} />
+        <Tabs.Screen name="vender"
+          options={{
+            title: 'Vender',
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon icon={Icon.boton_añadir} color={color} name='Vender' focused={focused} />
+            )
+          }} />
+        <Tabs.Screen name="mensajes"
+          options={{
+            title: 'Mensajes',
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon icon={Icon.mensajes} color={color} name='Mensajes' focused={focused} />
+            )
+          }} />
+        <Tabs.Screen name="perfil"
+          options={{
+            title: 'Perfil',
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon icon={Icon.perfil} color={color} name='Perfil' focused={focused} />
+            )
+          }} />
+      </Tabs>
+    </>
+  )
+}
+
+export default TabsLayout
