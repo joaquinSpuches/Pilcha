@@ -6,10 +6,10 @@ const CustomButton = ({ image, texto, handlePress, containerStyles, textStyles, 
 
 
     return (
-        <TouchableOpacity onPress={handlePress} className={` border-2 border-solid border-primary rounded-full justify-center items-center  ${containerStyles}`} >
+        <TouchableOpacity onPress={handlePress} className={` border-[1px] border-solid  rounded-full justify-center items-center  ${containerStyles}`} >
             <View className="flex flex-row items-center ">
                 {
-                    image && <Image className="mr-2" source={image} />
+                    image ?<Image className="mr-2" source={image} />:null
                 }
                 <Text className={`text-center ${textStyles}`}>{texto}</Text>
             </View>

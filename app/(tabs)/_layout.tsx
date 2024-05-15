@@ -13,7 +13,7 @@ const TabIcon = ({ icon, color, name, focused }: { icon: any, color: string, nam
         resizeMode='contain'
         tintColor={'#014740'}
         style={{ tintColor: focused ? '#014740' : 'gray' }}
-      // className='w-6 h-6'
+  
       />
     </View>
   )

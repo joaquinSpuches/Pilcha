@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, View, ScrollView,Image } from "react-native";
+import { Text, View, ScrollView,Image, TouchableOpacity } from "react-native";
 import { Redirect, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Images from "../constants/Images"
@@ -21,29 +21,38 @@ export default function App() {
           texto={ 'Continuar con Google'}
           image={icon.google}
           handlePress={() => {}}
-          containerStyles= " w-4/5 py-4 mb-4"
+          containerStyles= " w-4/5 py-3 border-gray-400 mb-4"
           textStyles="text-lg"
+          isLoading={[]}
           />
            <CustomButton 
+           
           image={icon.apple}
           texto='Continuar con Apple'
           handlePress={() => {}}
-          containerStyles= "w-4/5 py-4 "
+          containerStyles= "w-4/5 border-gray-400 py-3 "
           textStyles="text-lg"
+          isLoading={[]}
           />
           <Image  source={Images.divisor} />
-           <CustomButton 
-          texto='Crear una cuenta'
-          handlePress={() => {router.push('/sign-up')}}
-          containerStyles= "w-4/5 py-4  bg-primary "
-          textStyles="text-white text-lg"
-          />
-          <Text className="text-center text-gray-400 my-4">¿Ya tienes cuenta?</Text>
           <CustomButton 
+            image={null}
+            texto='Crear una cuenta'
+            handlePress={() => {router.push('/sign-up')}}
+            containerStyles= "w-4/5 py-3  bg-primary "
+            textStyles="text-white text-lg"
+          isLoading={[]}
+          />
+          <TouchableOpacity >
+          <Text className="text-center text-gray-400 my-4">¿Ya tienes cuenta?</Text>
+          </TouchableOpacity>
+          <CustomButton 
+          image={null}
           texto='Iniciar sesión'
           handlePress={() => {router.push('/sign-in')}}
-          containerStyles= "w-4/5 py-4 "
-          textStyles="text-lg"
+          containerStyles= "w-4/5 border-primary py-3 "
+          textStyles="text-lg text-primary"
+          isLoading= 'false'
           />
           </View>
         </View>
