@@ -1,5 +1,6 @@
 import { Account, Avatars, Client, Databases, Query } from 'react-native-appwrite';
 import { ID } from 'react-native-appwrite';
+import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
 
 
 export const config = {                   
@@ -33,7 +34,7 @@ export const createUser = async (email: string, password: string, nombre: string
         if (!newAccount) throw new Error;
         const avatarUrl = avatar.getInitials(nombre);
 
-        await signIn(email, password);
+       
 
         const newUser = await databases.createDocument(config.databaseId, config.userCollectionId, ID.unique(), {	
             accountId: newAccount.$id,
@@ -48,12 +49,16 @@ export const createUser = async (email: string, password: string, nombre: string
 }
 
 export const signIn = async (email: string, password: string) => {
+    
     try {
-        const session = await account.createEmailPasswordSession(email, password);
+        
+       
+        
+                const session = await account.createEmailPasswordSession(email,password);
 
         return session
     } catch (error) {
-        console.error(error);
+        console.error('este es el error' + error);
         throw new Error('Error signing in');
     }
 }
@@ -61,7 +66,8 @@ export const signIn = async (email: string, password: string) => {
 export const getCurrentUser = async () => {
     try{
         const currentAccount = await account.get();
-
+       
+        
         if(!currentAccount) throw new Error;
 
         const currentUser = await databases.listDocuments(config.databaseId, config.userCollectionId, [Query.equal('accountId', currentAccount.$id)])
@@ -70,7 +76,9 @@ export const getCurrentUser = async () => {
     return currentUser.documents[0];
 
     }catch(error){ 
+        console.log('este es el error' + error);
+        
         console.error(error);
-        throw new Error;
+        throw new Error(error);
     }
 }

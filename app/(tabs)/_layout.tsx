@@ -1,12 +1,13 @@
 import { View, Text, Image } from 'react-native';
 import { Tabs, Redirect } from 'expo-router';
 import Icon from '../../constants/icon'
-
+import GlobalProvider from "@/context/GlobalProvider"
 
 const TabIcon = ({ icon, color, name, focused }: { icon: any, color: string, name: string, focused: boolean }) => {
 
 
   return (
+    <GlobalProvider>
     <View>
       <Image
         source={icon}
@@ -16,6 +17,8 @@ const TabIcon = ({ icon, color, name, focused }: { icon: any, color: string, nam
   
       />
     </View>
+    </GlobalProvider>
+
   )
 }
 

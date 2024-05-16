@@ -5,6 +5,8 @@ import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
 import { router } from 'expo-router'
 import { signIn } from '@/lib/appwrite'
+import { getCurrentUser } from '@/lib/appwrite'
+import { Account } from 'react-native-appwrite'
 
 const SignIn = () => {
   const [form, setForm] = useState({
@@ -19,6 +21,8 @@ const SignIn = () => {
     }
     setIsSubmitting(true)
     try{
+        
+        
         await signIn(form.email, form.password)
 
         // marcarlo como estado global (global state)....
