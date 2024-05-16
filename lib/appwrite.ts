@@ -79,6 +79,6 @@ export const getCurrentUser = async () => {
         console.log('este es el error' + error);
         
         console.error(error);
-        throw new Error(error);
+        throw new Error;
     }
 }
