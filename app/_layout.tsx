@@ -13,7 +13,7 @@ const RootLayout = () => {
     <Stack>
       <Stack.Screen name='index' options={{ headerShown: false }}/>
       <Stack.Screen name='(auth)' options={{ headerShown: true, headerBackTitle:'Atras', headerTitle: '', headerTintColor: 'gray'}}/>
-      <Stack.Screen name='(tabs)' options={{ headerShown: true, headerBackTitle:'Atras', headerTitle: '', headerTintColor: 'gray'}}/>
+      <Stack.Screen name='(tabs)' options={{ headerShown: false, headerBackTitle:'Atras', headerTitle: '', headerTintColor: 'gray'}}/>
     </Stack>
    </GlobalProvider>  
       

@@ -7,7 +7,7 @@ const TabIcon = ({ icon, color, name, focused }: { icon: any, color: string, nam
 
 
   return (
-    <GlobalProvider>
+    
     <View>
       <Image
         source={icon}
@@ -17,7 +17,7 @@ const TabIcon = ({ icon, color, name, focused }: { icon: any, color: string, nam
   
       />
     </View>
-    </GlobalProvider>
+    
 
   )
 }
