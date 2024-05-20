@@ -12,7 +12,15 @@ export const config = {
     productCollectionId: '6644c6b6002f45a38bd1',
     storageId: '6644c8d000229f3c11fc',
 }
-
+const {
+    endpoint,  
+      platform,    
+      projectId,
+    databaseId,
+    userCollectionId,
+    productCollectionId,
+    storageId
+} = config
 const client = new Client();
 
 client
@@ -70,7 +78,7 @@ export const getCurrentUser = async () => {
         
         if(!currentAccount) throw new Error;
 
-        const currentUser = await databases.listDocuments(config.databaseId, config.userCollectionId, [Query.equal('accountId', currentAccount.$id)])
+        const currentUser = await databases.listDocuments(databaseId, userCollectionId, [Query.equal('accountId', currentAccount.$id)])
 
     if(!currentUser) throw new Error;
     return currentUser.documents[0];
@@ -81,4 +89,40 @@ export const getCurrentUser = async () => {
         console.error(error);
         throw new Error;
     }
+}
+
+export const getProductos = async () => {
+    try {
+        const productos = await databases.listDocuments(databaseId, productCollectionId);
+        if (!productos) throw new Error;
+        return productos;
+    } catch (error) {
+        console.error(error);
+        throw new Error;
+    }
+} 
+
+export const getCurrentProduct = async (prendaId) => {
+    const id = await prendaId
+    const producto = await databases.listDocuments(databaseId, productCollectionId, [Query.equal('$id', id )])
+    const item =  producto.documents
+    try {
+        if(!producto) throw new Error
+        
+        
+       
+            
+    
+        
+        return item;
+        
+        
+        
+    }catch (error){
+        console.log('este es el error del catch: '+error );
+        throw new Error
+        
+    }
+
+
 }

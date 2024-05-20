@@ -1,10 +1,24 @@
-import { View, Text, FlatList, Image,ScrollView ,TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, FlatList, Image,ScrollView ,TouchableOpacity, TextInput, RefreshControl } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import  Icon  from '@/constants/icon'
-import Destacados from '@/components/Destacados'
+import ListaInicio from '@/components/ListaInicio'
+import TituloLista from '@/components/TituloLista'
+import { useState } from 'react'
+import { getProductos } from '@/lib/appwrite'
+
+import useAppwrite from '@/lib/useAppwrite'
 
 const Inicio = () => {
+  const [refreshing, setRefreshing] = useState(false)
+  const {refetch} = useAppwrite(getProductos)
+  const onRefresh = async() => {
+    setRefreshing(true)
+    await refetch()
+    setTimeout(() => {
+      setRefreshing(false)
+    }, 2000)
+  }
   return (
     <SafeAreaView className='bg-white w-full  h-screen '>
      
@@ -25,11 +39,15 @@ const Inicio = () => {
         renderItem={({ item }) => <TouchableOpacity  className=''><Image source={item.id}  /></TouchableOpacity>}
         horizontal
         />
-         <ScrollView >
-      <Destacados title='Destacados'imageStyle=''/>
-      <Destacados title='Recientes' imageStyle=''/>
-      <Destacados title='Tus marcas favoritas' imageStyle='w-[112px] h-[112px]'/>
-      <Destacados title='Tus prendas favoritas' imageStyle='w-[112px] h-[112px]'/>
+         <ScrollView  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+         <TituloLista titulo='Destacados' />
+      <ListaInicio imageStyle='w-[172px] h-[172px] '/>
+      <TituloLista titulo='Recientes'/>
+      <ListaInicio imageStyle='w-[172px] h-[172px]'/>
+      <TituloLista titulo='Tus marcas favoritas'/>
+      <ListaInicio  imageStyle='w-[112px] h-[112px]'/>
+      <TituloLista titulo='Tus prendas favoritas'/>
+      <ListaInicio  imageStyle='w-[112px] h-[112px]'/>
         
       
       
@@ -41,3 +59,4 @@ const Inicio = () => {
 }
 
 export default Inicio
+
